@@ -6,7 +6,7 @@ A continuación encontrarás los pasos previos necesarios para la descarga de lo
 
 ## **1. Programas empleados en el preprocesado**:
 
-<table>
+<table align="center" border="1">
   <tr>
     <th>Herramienta</th>
     <th>Uso en el pipeline</th>
