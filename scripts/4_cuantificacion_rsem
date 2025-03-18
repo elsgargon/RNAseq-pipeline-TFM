@@ -1,0 +1,23 @@
+###########################
+# Cuantificación con RSEM #
+###########################
+
+# Establecer directorios
+rsem_reference="data/referencia/rsem_reference" # Directorio donde hemos creado la referencia de RSEM
+input_dir="data/processed/alineamientos" # Directorio donde están los archivos .bam resultantes del alineamiento con STAR
+output_dir="data/processed/cuantificacion" # Directorio de salida donde se crearan los archivos de conteos
+
+for bam_file in $input_dir/*_Aligned.toTranscriptome.out.bam; do
+    sample_id=$(basename $bam_file "_Aligned.toTranscriptome.out.bam")
+rsem-calculate-expression \
+        --num-threads 10 \
+        --fragment-length-max 1000 \
+        --no-bam-output \
+        --paired-end \
+        --estimate-rspd \
+        --forward-prob 0.0 \
+        --bam "$bam_file" \
+        "$rsem_reference" \
+        "$output_dir/$sample_id"
+done
+
