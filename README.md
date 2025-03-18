@@ -7,6 +7,7 @@ Se emplean los siguientes **programas**:
   - **FastQC**: para el control de calidad de las lecturas.
   - **MultiQC**: para la visualización conjunta de los ficheros de control de calidad de todas las muestras.
   - **FastP**: para estimar el número de lecturas que presentan una base indeterminada (N).
+  - **Fastq-Screen**: para determinar la existencia de posibles contaminaciones de otros organismos.
   - **Trimmomatic**: para realizar el filtrado de las lecturas por calidad.
   - **STAR**: para alinear las lecturas al genoma de referencia.
   - **Bamtools**: para realizar un control de calidad de las lecturas alineadas (ficheros .bam).
