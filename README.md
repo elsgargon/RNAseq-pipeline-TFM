@@ -14,8 +14,10 @@ Los scripts se emplean para hacer un análisis de expresión diferencial entre a
   - **RSEM**: para cuantificar la expresión de los genes.
   - **RNASeQC**: ?
 
-Todos estos pogramas empleados se encuentran ya descargados en el entorno de conda RNAseq_pipeline.yml para mayor reproducibilidad. 
-
+Todos estos pogramas empleados se encuentran ya descargados en el entorno de conda RNAseq_pipeline.yml para mayor reproducibilidad. Descarga el archivo e introduce el siguiente comando en el terminal para crear el entorno de conda desde el archivo:
+```markdown
+conda env create -f RNAseq_pipeline.yml
+conda activate RNAseq_pipeline
 
 
 ## **2. Paquetes de R empleados en el análisis de expresión diferencial** 
