@@ -1,0 +1,33 @@
+#################################################################
+# Descarga y conversión de las muestras a fastq con SRAToolkits #
+#################################################################
+
+# Ruta del archivo muestras.txt que contiene los SRA IDs
+file_with_samples="/data/raw/muestras.txt"
+
+# Ruta de salida para los archivos FASTQ
+output_dir="/data/raw"
+
+# Recorrer cada línea del archivo
+while read -r sra_id; do
+    echo "Descargando muestra con SRA ID: ${sra_id}"
+
+    # Descargar el archivo .sra
+    prefetch ${sra_id} &
+
+    # Esperar a que termine la descarga del archivo .sra
+    wait
+
+    # Convertir y descomprimir los archivos .sra a .fastq y .gz
+    echo "Iniciando conversión y compresión para: ${sra_id}"
+    fasterq-dump --split-files ${sra_id} -O ${output_dir}
+
+    # Comprimir los archivos .fastq generados
+    gzip ${output_dir}/${sra_id}_1.fastq
+    gzip ${output_dir}/${sra_id}_2.fastq
+
+    # Eliminar el archivo .sra después de la conversión y compresión
+    rm -rf ${sra_id}
+
+    echo "Procesado completado para SRA ID: ${sra_id}"
+done < "$file_with_samples"
