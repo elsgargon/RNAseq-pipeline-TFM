@@ -6,7 +6,7 @@ A continuación encontrarás los pasos previos necesarios para la descarga de lo
 
 ## **1. Programas empleados en el preprocesado**:
 
-<table align="center" border="1">
+<table align="center">
   <tr>
     <th>Herramienta</th>
     <th>Uso en el pipeline</th>
@@ -63,7 +63,7 @@ conda activate RNAseq_pipeline
 
 Los paquetes empleados son:
 
-<table align="center" border="1">
+<table align="center">
   <tr>
     <td>DESeq2</td>
     <td>AnnotationDbi</td>
