@@ -26,15 +26,40 @@ conda activate RNAseq_pipeline
 
 Los paquetes empleados son:
 
-| Paquetes         |empleados          |
-|------------------|---------------- -|
-| DESeq2           | AnnotationDbi    |
-| tximport         | org.Hs.eg.db     |
-| sva              | EnhancedVolcano  |
-| readr            | OUTRIDER         |
-| pheatmap         | clusterProfiler  |
-| ggplot2          | enrichplot       |
-| IHW              | tidyverse        |
+## **2. Paquetes de R empleados en el análisis de expresión diferencial** 
+
+Los paquetes empleados son:
+
+<table>
+  <tr>
+    <td>DESeq2</td>
+    <td>AnnotationDbi</td>
+  </tr>
+  <tr>
+    <td>tximport</td>
+    <td>org.Hs.eg.db</td>
+  </tr>
+  <tr>
+    <td>sva</td>
+    <td>EnhancedVolcano</td>
+  </tr>
+  <tr>
+    <td>readr</td>
+    <td>OUTRIDER</td>
+  </tr>
+  <tr>
+    <td>pheatmap</td>
+    <td>clusterProfiler</td>
+  </tr>
+  <tr>
+    <td>ggplot2</td>
+    <td>enrichplot</td>
+  </tr>
+  <tr>
+    <td>IHW</td>
+    <td>tidyverse</td>
+  </tr>
+</table>
 
 El siguiente código comprueba si todos los paquetes necesarios para correr el script *5_Analsis_expresion_diferencial* en R están descargados. En caso de faltar alguno, se descargará automáticamente. Además, este código carga todos los paquetes necesarios en memoria, permitiendo ejecutar el script sin hacer ningún paso adicional.
 ```r
