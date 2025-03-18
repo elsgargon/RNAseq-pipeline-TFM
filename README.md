@@ -18,7 +18,7 @@ Todos estos pogramas empleados se encuentran ya descargados en el entorno de con
 ```markdown
 conda env create -f RNAseq_pipeline.yml
 conda activate RNAseq_pipeline
-
+```
 
 ## **2. Paquetes de R empleados en el análisis de expresión diferencial** 
 
