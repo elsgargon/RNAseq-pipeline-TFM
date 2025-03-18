@@ -68,23 +68,19 @@ Los paquetes empleados son:
     <td>DESeq2</td>
     <td>AnnotationDbi</td>
     <td>tximport</td>
-  </tr>
-  <tr>
     <td>org.Hs.eg.db</td>
     <td>sva</td>
-    <td>EnhancedVolcano</td>
   </tr>
   <tr>
+    <td>EnhancedVolcano</td>
     <td>readr</td>
     <td>OUTRIDER</td>
     <td>pheatmap</td>
+    <td>clusterProfiler</td>
   </tr>
   <tr>
-    <td>clusterProfiler</td>
     <td>ggplot2</td>
     <td>enrichplot</td>
-  </tr>
-  <tr>
     <td>IHW</td>
     <td>tidyverse</td>
   </tr>
