@@ -2,6 +2,8 @@
 # Descarga y conversión de las muestras a fastq con SRAToolkits #
 #################################################################
 
+# Descargar previamente "Accesion List" de GEO y almacenarla en el directorio data/raw bajo el nombre de muestras.txt
+
 # Ruta del archivo muestras.txt que contiene los SRA IDs
 file_with_samples="data/raw/muestras.txt"
 
