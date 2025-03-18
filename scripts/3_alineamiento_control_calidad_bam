@@ -1,0 +1,98 @@
+############################################################################
+# Alineamiento con STAR y control de calidad del alineamiento con Bamtools #
+############################################################################
+
+# Alineamiento con STAR
+#########################
+
+# Crear índice de STAR
+STAR --runMode genomeGenerate \
+    --genomeDir data/reference/STARv275a_genome_v47 \
+    --genomeFastaFiles data/reference/GRCh38.p14.genome.fa \
+    --sjdbGTFfile data/reference/gencode.v47.annotation.gtf \
+    --sjdbOverhang 100 --runThreadN 10
+
+# Eliminae el límite en el número de descriptores de archivo abiertos para asegurar correcto funcionamiento de STAR
+ulimit -n 10000
+
+# Ejecutar alineamiento
+fastq_dir="data/raw/Muestras"  
+output_dir="data/processed/Alineamiento"  
+genome_dir="data/reference/STARv275a_genome_v47"  
+cd $output_dir
+
+for fastq in $fastq_dir/*.fastq.gz; do
+    sample_id=$(basename $fastq ".fastq.gz")
+    
+   STAR --runMode alignReads \
+        --runThreadN 15 \
+        --genomeDir $genome_dir \
+        --twopassMode Basic \
+        --outFilterMultimapNmax 20 \
+        --alignSJoverhangMin 8 \
+        --alignSJDBoverhangMin 1 \
+        --outFilterMismatchNmax 999 \
+        --outFilterMismatchNoverLmax 0.1 \
+        --alignIntronMin 20 \
+        --alignIntronMax 1000000 \
+        --outFilterType BySJout \
+        --outFilterScoreMinOverLread 0.33 \
+        --outFilterMatchNminOverLread 0.33 \
+        --limitSjdbInsertNsj 1200000 \
+        --readFilesIn $fastq \
+	      --readFilesCommand gunzip -c \
+        --outFileNamePrefix ${output_dir}/${sample_id}_ \
+        --outSAMstrandField intronMotif \
+        --outFilterIntronMotifs None \
+        --alignSoftClipAtReferenceEnds Yes \
+        --quantMode TranscriptomeSAM GeneCounts \
+        --outSAMtype BAM SortedByCoordinate \
+        --outSAMunmapped Within \
+        --genomeLoad NoSharedMemory \
+        --chimSegmentMin 15 \
+        --chimJunctionOverhangMin 15 \
+        --chimOutType Junctions WithinBAM SoftClip \
+        --chimMainSegmentMultNmax 1 \
+        --outSAMattributes NH HI AS nM NM ch \
+        --outSAMattrRGline ID:rg1 SM:${sample_id}
+done
+
+# Control de calidad con bamstats
+##################################
+
+for file in data/processed/Alineamiento/*.sortedByCoord.out.bam; do
+    bamtools stats -in "$file" > "data/processed/Alineamiento/Control_calidad_bam/$(basename "${file%.bam}.txt")"
+done
+
+# Visualización conjunta de resultados
+multiqc data/processed/Alineamiento/Control_calidad_bam -o data/processed/Alineamiento/Control_calidad_bam/multiqc
+
+# Confirmar que las indeterminaciones (N) no están afectando al porcentaje de mapeo
+####################################################################################
+
+# Extraer % de mapeo por muestra
+folder_path="data/processed/Alineamiento/Control_calidad_bam"
+output_file="data/processed/Alineamiento/Control_calidad_bam/porcentaje_mapeo.txt"
+
+# Encabezado del archivo de salida
+echo -e "SRR_ID\tMapped_Percentage" > "$output_file"
+# Iterar sobre los archivos .txt en la carpeta
+for file in "$folder_path"/*.txt; do
+    srr_id=$(basename "$file" | sed -E 's/^(SRR[0-9]+)_.*$/\1/')
+    mapped_percentage=$(grep "Mapped reads" "$file" | sed -E 's/.*\(([0-9]+\.[0-9]+)%\).*/\1/')
+    echo -e "$srr_id\t$mapped_percentage" >> "$output_file"
+done
+
+# EN R #
+########
+
+# Cargar datos
+data <- read.table("data/processed/Alineamiento/Control_calidad_bam/porcentaje_mapeo.txt", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+
+# Añadir una columna manualmente llamada n_content_fail_warn que indique que muestras presentan un "Warn" o "Fail" en el contenido de N del reporte de FastQC. Poner 1 si lo tienen y 0 si no.
+
+# Hacer regresión GLM
+modelo <- glm(Mapped_Percentage ~ n_content_fail_warn, data = data)
+summary(modelo)
+
+
