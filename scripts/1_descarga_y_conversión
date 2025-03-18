@@ -3,10 +3,10 @@
 #################################################################
 
 # Ruta del archivo muestras.txt que contiene los SRA IDs
-file_with_samples="/data/raw/muestras.txt"
+file_with_samples="data/raw/muestras.txt"
 
 # Ruta de salida para los archivos FASTQ
-output_dir="/data/raw"
+output_dir="data/raw"
 
 # Recorrer cada línea del archivo
 while read -r sra_id; do
