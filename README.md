@@ -5,16 +5,53 @@ Los scripts se emplean para hacer un análisis de expresión diferencial entre a
 A continuación encontrarás los pasos previos necesarios para la descarga de los programas y paquetes de R empleados en este pipeline.
 
 ## **1. Programas empleados en el preprocesado**:
-  - **SRAToolkits**: para la descarga de archivos de Gene Expression Omnibus
-  - **FastQC**: para el control de calidad de las lecturas.
-  - **MultiQC**: para la visualización conjunta de los ficheros de control de calidad de todas las muestras.
-  - **FastP**: para estimar el número de lecturas que presentan una base indeterminada (N).
-  - **Fastq-Screen**: para determinar la existencia de posibles contaminaciones de otros organismos.
-  - **Trimmomatic**: para realizar el filtrado de las lecturas por calidad.
-  - **STAR**: para alinear las lecturas al genoma de referencia.
-  - **Bamtools**: para realizar un control de calidad de las lecturas alineadas (ficheros .bam).
-  - **RSEM**: para cuantificar la expresión de los genes.
-  - **RNASeQC**: ?
+
+<table>
+  <tr>
+    <th>Herramienta</th>
+    <th>Uso en el pipeline</th>
+  </tr>
+  <tr>
+    <td>SRAToolkits</td>
+    <td>Para la descarga de archivos de Gene Expression Omnibus</td>
+  </tr>
+  <tr>
+    <td>FastQC</td>
+    <td>Para el control de calidad de las lecturas.</td>
+  </tr>
+  <tr>
+    <td>MultiQC</td>
+    <td>Para la visualización conjunta de los ficheros de control de calidad de todas las muestras.</td>
+  </tr>
+  <tr>
+    <td>FastP</td>
+    <td>Para estimar el número de lecturas que presentan una base indeterminada (N).</td>
+  </tr>
+  <tr>
+    <td>Fastq-Screen</td>
+    <td>Para determinar la existencia de posibles contaminaciones de otros organismos.</td>
+  </tr>
+  <tr>
+    <td>Trimmomatic</td>
+    <td>Para realizar el filtrado de las lecturas por calidad.</td>
+  </tr>
+  <tr>
+    <td>STAR</td>
+    <td>Para alinear las lecturas al genoma de referencia.</td>
+  </tr>
+  <tr>
+    <td>Bamtools</td>
+    <td>Para realizar un control de calidad de las lecturas alineadas (ficheros .bam).</td>
+  </tr>
+  <tr>
+    <td>RSEM</td>
+    <td>Para cuantificar la expresión de los genes.</td>
+  </tr>
+  <tr>
+    <td>RNASeQC</td>
+    <td>Para evaluar la calidad de las muestras de RNA-seq, incluyendo la distribución de las longitudes de los fragmentos, la complejidad y otros parámetros de calidad.</td>
+  </tr>
+</table>
 
 Todos estos pogramas empleados se encuentran ya descargados en el entorno de conda RNAseq_pipeline.yml para mayor reproducibilidad. Descarga el archivo e introduce el siguiente comando en el terminal para crear el entorno de conda desde el archivo:
 ```markdown
