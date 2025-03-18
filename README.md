@@ -16,21 +16,7 @@ Se emplean los siguientes **programas**:
 
 Todos estos pogramas empleados se encuentran ya descargados en el entorno de conda RNAseq_pipeline.yml para mayor reproducibilidad. 
 
-**Paquetes de R** empleados en el análisis de expresión diferencial: 
-- Deseq2
-- tximport
-- sva
-- readr
-- pheatmap
-- ggplot2
-- IHW
-- AnnotationDbi
-- org.Hs.eg.db
-- EnhancedVolcano
-- OUTRIDER
-- clusterProfiler
-- enrichplot
-- tidyverse
+**Paquetes de R** empleados en el análisis de expresión diferencial: Deseq2, tximport, sva, readr, pheatmap, ggplot2, IHW, AnnotationDbi, org.Hs.eg.db, EnhancedVolcano, OUTRIDER, clusterProfiler, enrichplot y tidyverse.
 
 El siguiente código comprueba si todos los paquetes necesarios para correr el script *5_Analsis_expresion_diferencial* en R están descargados. En caso de faltar alguno, se descargará automáticamente. Además, este código carga todos los paquetes necesarios en memoria, quedando todo listo para ejecutar el  script.
 ```r
