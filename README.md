@@ -2,7 +2,7 @@
 En este repositorio se incluyen todos los script empleados para el desarrollo del TFM "Estudio transcriptómico" en el máster en Bioinformática de la Universidad VIU. 
 Los scripts se emplean para hacer un análisis de expresión diferencial entre asmáticos y controles estratificado por sexo. El orden de ejecución de scripts viene determinado por su nombre "1_Nombre". 
 
-**Programas empleados en el preprocesado**:
+**1. Programas empleados en el preprocesado**:
   - **SRAToolkits**: para la descarga de archivos de Gene Expression Omnibus
   - **FastQC**: para el control de calidad de las lecturas.
   - **MultiQC**: para la visualización conjunta de los ficheros de control de calidad de todas las muestras.
@@ -16,7 +16,9 @@ Los scripts se emplean para hacer un análisis de expresión diferencial entre a
 
 Todos estos pogramas empleados se encuentran ya descargados en el entorno de conda RNAseq_pipeline.yml para mayor reproducibilidad. 
 
-**Paquetes de R empleados en el análisis de expresión diferencial** 
+
+
+**2. Paquetes de R empleados en el análisis de expresión diferencial** 
 
 Deseq2, tximport, sva, readr, pheatmap, ggplot2, IHW, AnnotationDbi, org.Hs.eg.db, EnhancedVolcano, OUTRIDER, clusterProfiler, enrichplot y tidyverse.
 
