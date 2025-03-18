@@ -8,12 +8,13 @@ multiqc data/processed/Control_calidad -o data/processed/Control_calidad/multiqc
 
 # Comprobar contaminaciones con Fastqscreen
 # Obtener genomas de referencia por defecto de Fastq-screen
-cd data/raw/processed/Control_calidad/contaminaciones
+cd data/raw/processed/Control_calidad/contaminaciones # Directorio donde se almacenarán los genomas de referencia
 fastq_screen --get_genomes
 
 # Ejecutar Fastq-screen con Bowtie2 para encontrar alineamiento con secuencias de otros organismos
-cd data/raw/processed/Control_calidad/contaminaciones
+cd data/raw/processed/Control_calidad/contaminaciones # Directorio donde se almacenarán los resultados
 fastq_screen data/raw/*.fastq.gz --threads 8 --aligner Bowtie2
+
 # Visualizar resultados de forma conjunta
 multiqc data/raw/processed/Control_calidad/contaminaciones -o data/raw/processed/Control_calidad/contaminaciones/multiqc
 
