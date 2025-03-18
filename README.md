@@ -2,6 +2,8 @@
 En este repositorio se incluyen todos los script empleados para el desarrollo del TFM "Estudio transcriptómico" en el máster en Bioinformática de la Universidad VIU. 
 Los scripts se emplean para hacer un análisis de expresión diferencial entre asmáticos y controles estratificado por sexo. El orden de ejecución de scripts viene determinado por su nombre "1_Nombre". 
 
+A continuación encontrarás los pasos previos necesarios para la descarga de los programas y paquetes de R empleados en este pipeline.
+
 ## **1. Programas empleados en el preprocesado**:
   - **SRAToolkits**: para la descarga de archivos de Gene Expression Omnibus
   - **FastQC**: para el control de calidad de las lecturas.
@@ -24,7 +26,13 @@ conda activate RNAseq_pipeline
 
 Los paquetes empleados son:
 
-Deseq2, tximport, sva, readr, pheatmap, ggplot2, IHW, AnnotationDbi, org.Hs.eg.db, EnhancedVolcano, OUTRIDER, clusterProfiler, enrichplot y tidyverse.
+| Deseq2 | AnnotationDbi |
+| tximport | org.Hs.eg.db |
+| sva | EnhancedVolcano |
+| readr | OUTRIDER |
+| pheatmap | clusterProfiler |
+| ggplot2 | enrichplot |
+| IHW | tidyverse |
 
 El siguiente código comprueba si todos los paquetes necesarios para correr el script *5_Analsis_expresion_diferencial* en R están descargados. En caso de faltar alguno, se descargará automáticamente. Además, este código carga todos los paquetes necesarios en memoria, permitiendo ejecutar el script sin hacer ningún paso adicional.
 ```r
