@@ -2,6 +2,15 @@
 # Control de calidad #
 ######################
 
+# Crear directorios necesarios para almacenar los resultados
+mkdir -p data/processed/Control_calidad \
+         data/processed/Control_calidad/multiqc \
+         data/processed/Control_calidad/contaminaciones \
+         data/processed/Control_calidad/contaminaciones/multiqc \
+         data/processed/Control_calidad/fastp_Nreads \
+         data/processed/Control_calidad/fastp_Nreads/multiqc
+
+
 # Ejecutar control de calidad con FastQC y visualización conjunta de todos los reportes con MultiQC
 fastqc data/raw/*.fastq.gz -o data/processed/Control_calidad
 multiqc data/processed/Control_calidad -o data/processed/Control_calidad/multiqc
