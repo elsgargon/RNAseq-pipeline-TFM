@@ -7,19 +7,18 @@
 
 # Crear índice de STAR
 STAR --runMode genomeGenerate \
-    --genomeDir data/reference/STARv275a_genome_v47 \
-    --genomeFastaFiles data/reference/GRCh38.p14.genome.fa \
-    --sjdbGTFfile data/reference/gencode.v47.annotation.gtf \
+    --genomeDir data/reference/STARv275a_genome_v47 \ # Archivo de salida
+    --genomeFastaFiles data/reference/GRCh38.p14.genome.fa \ # Genoma de referencia
+    --sjdbGTFfile data/reference/gencode.v47.annotation.gtf \ # Archivo de anotación
     --sjdbOverhang 100 --runThreadN 10
 
 # Eliminae el límite en el número de descriptores de archivo abiertos para asegurar correcto funcionamiento de STAR
 ulimit -n 10000
 
 # Ejecutar alineamiento
-fastq_dir="data/raw/Muestras"  
-output_dir="data/processed/Alineamiento"  
-genome_dir="data/reference/STARv275a_genome_v47"  
-cd $output_dir
+fastq_dir="data/raw/Muestras"  # Directorio donde se almacenan los archivos fastq
+output_dir="data/processed/Alineamiento"  # Directorio de salida donde se almacenarán los archivos .bam
+genome_dir="data/reference/STARv275a_genome_v47"  # Directorio donde se encuentra el índice de STAR
 
 for fastq in $fastq_dir/*.fastq.gz; do
     sample_id=$(basename $fastq ".fastq.gz")
@@ -40,7 +39,7 @@ for fastq in $fastq_dir/*.fastq.gz; do
         --outFilterMatchNminOverLread 0.33 \
         --limitSjdbInsertNsj 1200000 \
         --readFilesIn $fastq \
-	      --readFilesCommand gunzip -c \
+	--readFilesCommand gunzip -c \
         --outFileNamePrefix ${output_dir}/${sample_id}_ \
         --outSAMstrandField intronMotif \
         --outFilterIntronMotifs None \
@@ -71,8 +70,8 @@ multiqc data/processed/Alineamiento/Control_calidad_bam -o data/processed/Alinea
 ####################################################################################
 
 # Extraer % de mapeo por muestra
-folder_path="data/processed/Alineamiento/Control_calidad_bam"
-output_file="data/processed/Alineamiento/Control_calidad_bam/porcentaje_mapeo.txt"
+folder_path="data/processed/Alineamiento/Control_calidad_bam" # Directorio donde se encuentran los archivos de salida de Bamtools
+output_file="data/processed/Alineamiento/Control_calidad_bam/porcentaje_mapeo.txt" # Fichero donde se almacenarán los porcentajes de mapeo de cada muestra
 
 # Encabezado del archivo de salida
 echo -e "SRR_ID\tMapped_Percentage" > "$output_file"
@@ -85,11 +84,10 @@ done
 
 # EN R #
 ########
+# Añadir una columna manualmente con excel llamada n_content_fail_warn que indique que muestras presentan un "Warn" o "Fail" en el contenido de N del reporte de FastQC. Poner 1 si lo tienen y 0 si no.
 
 # Cargar datos
 data <- read.table("data/processed/Alineamiento/Control_calidad_bam/porcentaje_mapeo.txt", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
-
-# Añadir una columna manualmente llamada n_content_fail_warn que indique que muestras presentan un "Warn" o "Fail" en el contenido de N del reporte de FastQC. Poner 1 si lo tienen y 0 si no.
 
 # Hacer regresión GLM
 modelo <- glm(Mapped_Percentage ~ n_content_fail_warn, data = data)
