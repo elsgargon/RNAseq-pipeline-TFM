@@ -53,7 +53,7 @@ A continuación encontrarás los pasos previos necesarios para la descarga de lo
   </tr>
 </table>
 
-Todos estos pogramas empleados se encuentran ya descargados en el entorno de conda RNAseq_pipeline.yml para mayor reproducibilidad. Descarga el archivo e introduce el siguiente comando en el terminal para crear el entorno de conda desde el archivo:
+Todos estos pogramas empleados se encuentran ya descargados en el entorno de conda RNAseq_pipeline.yml para mayor reproducibilidad. Asegúrate de tener Conda instalado. Descarga el archivo e introduce el siguiente comando en el terminal para crear el entorno de conda desde el archivo:
 ```markdown
 conda env create -f RNAseq_pipeline.yml
 conda activate RNAseq_pipeline
