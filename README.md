@@ -32,7 +32,7 @@ Todos estos pogramas empleados se encuentran ya descargados en el entorno de con
 - enrichplot
 - tidyverse
 
-El siguiente código comprueba si todos los paquetes necesarios para correr el script *5_Analsis_expresion_diferencial* en R están descargados. En caso de faltar alguno, se descagra automáticamente. Además, este código carga todos los paquetes necesarios en memoria, quedando todo listo para ejecutar el  script.
+El siguiente código comprueba si todos los paquetes necesarios para correr el script *5_Analsis_expresion_diferencial* en R están descargados. En caso de faltar alguno, se descargará automáticamente. Además, este código carga todos los paquetes necesarios en memoria, quedando todo listo para ejecutar el  script.
 ```r
 ###################################################################################
 # Comprobación, descarga y carga en memoria automática de los paquetes necesarios #
