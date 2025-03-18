@@ -13,9 +13,11 @@ Se emplean los siguientes **programas**:
   - **Bamtools**: para realizar un control de calidad de las lecturas alineadas (ficheros .bam).
   - **RSEM**: para cuantificar la expresión de los genes.
   - **RNASeQC**: ?
-  - **Deseq2**: para el análisis de expresión diferencial en R. 
+
+Todos estos pogramas empleados se encuentran ya descargados en el entorno de conda RNAseq_pipeline.yml para mayor reproducibilidad. 
 
 **Paquetes de R** empleados en el análisis de expresión diferencial: 
+- Deseq2
 - tximport
 - sva
 - readr
@@ -29,4 +31,54 @@ Se emplean los siguientes **programas**:
 - clusterProfiler
 - enrichplot
 - tidyverse
+
+El siguiente código comprueba si todos los paquetes necesarios para correr el script *5_Analsis_expresion_diferencial* en R están descargados. En caso de faltar alguno, se descagra automáticamente. Además, este código carga todos los paquetes necesarios en memoria, quedando todo listo para ejecutar el  script.
+
+**Comprobación, descarga y carga en memoria automática de los paquetes necesarios** 
+################################################################################
+
+#Lista de paquetes necesarios
+required_packages <- c("DESeq2", "tximport", "sva", "readr", "pheatmap", "ggplot2", 
+                       "IHW", "AnnotationDbi", "org.Hs.eg.db", "EnhancedVolcano", 
+                       "OUTRIDER", "clusterProfiler", "enrichplot", "tidyverse")
+
+#Función para instalar paquetes faltantes
+install_if_missing <- function(packages) {
+  missing_packages <- packages[!(packages %in% installed.packages()[,"Package"])]
+  if (length(missing_packages) > 0) {
+    message("Instalando paquetes faltantes: ", paste(missing_packages, collapse = ", "))
+    install.packages(missing_packages, dependencies = TRUE)
+  } else {
+    message("Todos los paquetes están instalados.")
+  }
+}
+
+#Instalar paquetes de Bioconductor si faltan
+install_bioconductor_if_missing <- function(packages) {
+  if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+  
+  missing_packages <- packages[!(packages %in% installed.packages()[,"Package"])]
+  if (length(missing_packages) > 0) {
+    message("Instalando paquetes de Bioconductor faltantes: ", paste(missing_packages, collapse = ", "))
+    BiocManager::install(missing_packages, update = FALSE, ask = FALSE)
+  }
+}
+
+#Paquetes de CRAN
+cran_packages <- c("readr", "pheatmap", "ggplot2", "IHW", "tidyverse", "enrichplot")
+
+#Paquetes de Bioconductor
+bioconductor_packages <- c("DESeq2", "tximport", "sva", "AnnotationDbi", "org.Hs.eg.db", 
+                           "EnhancedVolcano", "OUTRIDER", "clusterProfiler")
+
+#Instalar paquetes de CRAN
+install_if_missing(cran_packages)
+
+#Instalar paquetes de Bioconductor
+install_bioconductor_if_missing(bioconductor_packages)
+
+#Cargar paquetes en memoria
+lapply(required_packages, library, character.only = TRUE)
+
 
