@@ -2,6 +2,13 @@
 # Alineamiento con STAR y control de calidad del alineamiento con Bamtools #
 ############################################################################
 
+# Descargar previamente los archivos de referencia y anotación (GRCh38.p14.genome.fa y gencode.v47.annotation.gtf) y almacenarlos en el directorio data/reference
+
+# Crear directorios necesarios para almacenar los resultados
+mkdir -p data/processed/Alineamiento \
+         data/processed/Alineamiento/Control_calidad_bam \
+         data/processed/Alineamiento/Control_calidad_bam/multiqc 
+
 # Alineamiento con STAR
 #########################
 
