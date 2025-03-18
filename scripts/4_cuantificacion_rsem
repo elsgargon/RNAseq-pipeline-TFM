@@ -2,6 +2,12 @@
 # Cuantificación con RSEM #
 ###########################
 
+# Crear directorios necesarios par almacenar resultados
+mkdir -p data/processed/cuantificacion
+
+# Crear referencia de RSEM
+
+
 # Establecer directorios
 rsem_reference="data/referencia/rsem_reference" # Directorio donde hemos creado la referencia de RSEM
 input_dir="data/processed/alineamientos" # Directorio donde están los archivos .bam resultantes del alineamiento con STAR
