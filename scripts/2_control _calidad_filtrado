@@ -1,0 +1,35 @@
+######################
+# Control de calidad #
+######################
+
+# Ejecutar control de calidad con FastQC y visualización conjunta de todos los reportes con MultiQC
+fastqc data/raw/*.fastq.gz -o data/processed/Control_calidad
+multiqc data/processed/Control_calidad -o data/processed/Control_calidad/multiqc
+
+# Comprobar contaminaciones con Fastqscreen
+# Obtener genomas de referencia por defecto de Fastq-screen
+cd data/raw/processed/Control_calidad/contaminaciones
+fastq_screen --get_genomes
+
+# Ejecutar Fastq-screen con Bowtie2 para encontrar alineamiento con secuencias de otros organismos
+cd data/raw/processed/Control_calidad/contaminaciones
+fastq_screen data/raw/*.fastq.gz --threads 8 --aligner Bowtie2
+# Visualizar resultados de forma conjunta
+multiqc data/raw/processed/Control_calidad/contaminaciones -o data/raw/processed/Control_calidad/contaminaciones/multiqc
+
+# En el control de calidad observamos un porcentaje alto de bases indeterminadas (N), especialmente en dos posiciones del genoma. Comprobamos el número exacto de secuencias con esta indeterminación usando fastp.
+# Calcular cuantas secuencias tienen dos o más N
+for file in data/raw/*.fastq.gz
+do
+    # Obtener el nombre del archivo sin la ruta ni la extensión
+    sample_name=$(basename $file .fastq.gz)
+    
+    # Ejecutar fastp con el nombre del archivo de salida para el informe
+    fastp -i $file -n 2 -j data/raw/processed/Control_calidad/fastp_Nreads/${sample_name}_fastp.json -h data/raw/processed/Control_calidad/fastp_Nreads/${sample_name}_fastp.html
+done
+
+# Visualizar los resultados de forma conjunta
+multiqc data/raw/processed/Control_calidad/fastp_Nreads -o data/raw/processed/Control_calidad/fastp_Nreads/multiqc
+
+
+
