@@ -26,7 +26,7 @@ conda activate RNAseq_pipeline
 
 Los paquetes empleados son:
 
-| Paquetes         |                  |
+| Paquetes                            |
 |------------------|---------------- -|
 | DESeq2           | AnnotationDbi    |
 | tximport         | org.Hs.eg.db     |
