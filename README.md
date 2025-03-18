@@ -86,7 +86,7 @@ Los paquetes empleados son:
   </tr>
 </table>
 
-El siguiente código comprueba si todos los paquetes necesarios para correr el script *5_Analsis_expresion_diferencial* en R están descargados. En caso de faltar alguno, se descargará automáticamente. Además, este código carga todos los paquetes necesarios en memoria, permitiendo ejecutar el script sin hacer ningún paso adicional.
+El siguiente código comprueba si todos los paquetes necesarios para correr el script *5_Analisis_expresion_diferencial* en R están descargados. En caso de faltar alguno, se descargará automáticamente. Además, este código carga todos los paquetes necesarios en memoria, permitiendo ejecutar el script sin hacer ningún paso adicional.
 ```r
 #Lista de paquetes necesarios
 required_packages <- c("DESeq2", "tximport", "sva", "readr", "pheatmap", "ggplot2", 
