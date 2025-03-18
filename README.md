@@ -16,7 +16,7 @@ Los scripts se emplean para hacer un análisis de expresión diferencial entre a
 
 Todos estos pogramas empleados se encuentran ya descargados en el entorno de conda RNAseq_pipeline.yml para mayor reproducibilidad. 
 
-
+⨪⨪⨪⨪⨪--
 
 **2. Paquetes de R empleados en el análisis de expresión diferencial** 
 
