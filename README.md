@@ -49,7 +49,7 @@ A continuación encontrarás los pasos previos necesarios para la descarga de lo
   </tr>
   <tr>
     <td>RNASeQC</td>
-    <td>Para evaluar la calidad de las muestras de RNA-seq, incluyendo la distribución de las longitudes de los fragmentos, la complejidad y otros parámetros de calidad.</td>
+    <td>?</td>
   </tr>
 </table>
 
