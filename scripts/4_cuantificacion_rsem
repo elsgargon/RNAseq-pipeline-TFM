@@ -10,7 +10,7 @@ mkdir -p data/processed/cuantificacion
 
 # Establecer directorios
 rsem_reference="data/referencia/rsem_reference" # Directorio donde hemos creado la referencia de RSEM
-input_dir="data/processed/alineamientos" # Directorio donde están los archivos .bam resultantes del alineamiento con STAR
+input_dir="data/processed/Alineamiento" # Directorio donde están los archivos .bam resultantes del alineamiento con STAR
 output_dir="data/processed/cuantificacion" # Directorio de salida donde se crearan los archivos de conteos
 
 for bam_file in $input_dir/*_Aligned.toTranscriptome.out.bam; do
