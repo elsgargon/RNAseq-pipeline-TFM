@@ -73,31 +73,6 @@ done
 # Visualización conjunta de resultados
 multiqc data/processed/Alineamiento/Control_calidad_bam -o data/processed/Alineamiento/Control_calidad_bam/multiqc
 
-# Confirmar que las indeterminaciones (N) no están afectando al porcentaje de mapeo
-####################################################################################
-
-# Extraer % de mapeo por muestra
-folder_path="data/processed/Alineamiento/Control_calidad_bam" # Directorio donde se encuentran los archivos de salida de Bamtools
-output_file="data/processed/Alineamiento/Control_calidad_bam/porcentaje_mapeo.txt" # Fichero donde se almacenarán los porcentajes de mapeo de cada muestra
-
-# Encabezado del archivo de salida
-echo -e "SRR_ID\tMapped_Percentage" > "$output_file"
-# Iterar sobre los archivos .txt en la carpeta
-for file in "$folder_path"/*.txt; do
-    srr_id=$(basename "$file" | sed -E 's/^(SRR[0-9]+)_.*$/\1/')
-    mapped_percentage=$(grep "Mapped reads" "$file" | sed -E 's/.*\(([0-9]+\.[0-9]+)%\).*/\1/')
-    echo -e "$srr_id\t$mapped_percentage" >> "$output_file"
-done
-
-# EN R #
-########
-# Añadir una columna manualmente con excel llamada n_content_fail_warn que indique que muestras presentan un "Warn" o "Fail" en el contenido de N del reporte de FastQC. Poner 1 si lo tienen y 0 si no.
-
-# Cargar datos
-data <- read.table("data/processed/Alineamiento/Control_calidad_bam/porcentaje_mapeo.txt", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
-
-# Hacer regresión GLM
-modelo <- glm(Mapped_Percentage ~ n_content_fail_warn, data = data)
 summary(modelo)
 
 
