@@ -58,7 +58,7 @@ modelo <- glm(Mapped_Percentage ~ n_content_fail_warn, data = data)
 summary(modelo)
 ```
 ## 4. Cuantificación de la expresión génica
-Una vez alineadas las lecturas, podemos realizar la cuantificación de la expresión génica, tanto a nivel de gen como a nivel de exones, con el programa RSEM. Los resultados se almacenarán en una nueva carpeta llamada "cuantification" Para realizar la cuantificación de forma automática ejecutar:
+Una vez alineadas las lecturas, podemos realizar la cuantificación de la expresión génica, tanto a nivel de gen como a nivel de exones, con el programa RSEM. Los resultados se almacenarán en una nueva carpeta llamada "cuantificacion" Para realizar la cuantificación de forma automática ejecutar:
 ```markdown
 ./scripts/4_cuantificacion_rsem.sh
 ```
