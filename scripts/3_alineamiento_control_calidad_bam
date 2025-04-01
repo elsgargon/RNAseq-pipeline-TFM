@@ -23,7 +23,7 @@ STAR --runMode genomeGenerate \
 ulimit -n 10000
 
 # Ejecutar alineamiento
-fastq_dir="data/raw/Muestras"  # Directorio donde se almacenan los archivos fastq
+fastq_dir="data/raw"  # Directorio donde se almacenan los archivos fastq
 output_dir="data/processed/Alineamiento"  # Directorio de salida donde se almacenarán los archivos .bam
 genome_dir="data/reference/STARv275a_genome_v47"  # Directorio donde se encuentra el índice de STAR
 
