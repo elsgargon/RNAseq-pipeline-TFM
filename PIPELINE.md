@@ -22,7 +22,7 @@ Para realizar este control de calidad de forma automática ejecutar:
 Existen diferentes herramientas para realizar el alineamiento de las lecturas. En este caso empleamos el programa STAR junto con el genoma de referencia GRCh38.p14.genome.fa y el archivo de anotación gencode.v47.annotation.gtf para el alineamiento. Es necesario descargar estos dos archivos previamente y almacenarlos en la carpeta data/reference. Bamtools se emplea para el control de calidad de los archivos .bam generados.
 Para realizar el alineamiento y el control de calidad de los archivos .bam, ejeutar:
 ```markdown
-./scripts/3_alineamiento.sh
+./scripts/3_alineamiento_control_calidad_bam.sh
 ```
 
 En este caso realizamos un paso adicional no incluido en el script automátizado en el que comprobamos si las muestras que presentan un alto número de indeterminaciones presentan asociación significativa con la calidad del mapeo (podría indicar la necesidad de filtrar o recortar estas bases si se relacionara con una calidad de mapeo baja): 
@@ -56,4 +56,9 @@ data <- read.table("data/processed/Alineamiento/Control_calidad_bam/porcentaje_m
 # Hacer regresión GLM
 modelo <- glm(Mapped_Percentage ~ n_content_fail_warn, data = data)
 summary(modelo)
+```
+## 4. Cuantificación de la expresión génica
+Una vez alineadas las lecturas, podemos realizar la cuantificación de la expresión génica, tanto a nivel de gen como a nivel de exones, con el programa RSEM. Para realizar la cuantificación de forma automática ejecutar:
+```markdown
+./scripts/4_cuantificacion.sh
 ```
