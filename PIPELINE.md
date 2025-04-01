@@ -4,5 +4,5 @@ Los scrips necesarios se encuentran en la carpeta scripts de este repositorio. T
 ## 1. Descarga de muestras desde GEO y conversión a fastq
 Es necesario descargar previamente el "Accesion List" de GEO y almacenarla en el directorio data/raw bajo el nombre de muestras.txt. Los archivos resultantes se almacenarán en esa misma carpeta en formato .fastq.gz para mejor optimización del espacio de almacenamiento. Para descargar y convertir las muestras de forma automática, ejecutar:
 ```markdown
-./scripts/1_descarga_conversión_muestras
+./scripts/1_descarga_y_conversión
 ```
