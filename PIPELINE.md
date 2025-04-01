@@ -12,9 +12,11 @@ Analizamos la calidad de las lecturas crudas descargadas empleando diferentes pr
 - **Fastqscreen**: comprobar si existen contaminaciones en nuestra muestra usando los genomas predeterminados.
 - **fastp**: en nuestro caso existía un alto número de bases indeterminadas en algunas posiciones (N) por lo que empleamos este programa para contabilizar el número total de N de las lecturas.
 - **MultiQC**: visualización conjunta de los resultados de todas las muestras.
+
 Estos informes deben revisarse para evaluar si es necesario realizar algun filtrado o recorte de las lecturas para mejorar su calidad. En nuestro caso no fue necesario.
 Para realizar este control de calidad de forma automática ejecutar:
 ```markdown
-./scripts/2_control_de_calidad
+./scripts/2_control_calidad
 ```
-
+## 3. Alineamiento al genoma de referencia
+Existen diferentes herramientas para realizar el alineamiento de las lecturas. En este caso empleamos el programa STAR junto con el genoma de referencia GRCh38.p14 y el archivo de anotación genómica
