@@ -1,6 +1,6 @@
 # RNAseq-pipeline-TFM
 En este repositorio se incluyen todos los script empleados para el desarrollo del TFM "Estudio transcriptómico" en el máster en Bioinformática de la Universidad VIU, edición 2024-2025. 
-Los scripts se emplean para hacer un análisis de expresión diferencial entre asmáticos y controles estratificado por sexo. El orden de ejecución de scripts viene determinado en su nombre. Los scripts almacenados en este repositorio no pueden ser ejecutados de forma automática ya que requieren de pasos manuales de descarga o modificación de archios. Se espera que sirvan de guía para ejecutar un pipeline de RNASeq completo en un set de datos específico.
+Los scripts se emplean para hacer un análisis de expresión diferencial entre asmáticos y controles estratificado por sexo. El orden de ejecución de scripts viene determinado en su nombre. En el apartado PIPELINE.md se encuentran detallados los pasos necesarios para ejecutar el pipeline al completo. 
 
 A continuación encontrarás los pasos previos necesarios para la descarga de los programas y paquetes de R empleados en este pipeline.
 
