@@ -6,7 +6,10 @@
 mkdir -p data/processed/cuantificacion
 
 # Crear referencia de RSEM
-
+rsem-prepare-reference --num-threads 10 \
+    --gtf data/referencia/gencode.v34.GRCh38.annotation.ERCC.gtf \
+    data/referencia/ \
+    rsem_reference
 
 # Establecer directorios
 rsem_reference="data/referencia/rsem_reference" # Directorio donde hemos creado la referencia de RSEM
