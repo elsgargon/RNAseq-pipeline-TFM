@@ -32,10 +32,6 @@ A continuación encontrarás los pasos previos necesarios para la descarga de lo
     <td>Para determinar la existencia de posibles contaminaciones de otros organismos.</td>
   </tr>
   <tr>
-    <td>Trimmomatic</td>
-    <td>Para realizar el filtrado de las lecturas por calidad.</td>
-  </tr>
-  <tr>
     <td>STAR</td>
     <td>Para alinear las lecturas al genoma de referencia.</td>
   </tr>
