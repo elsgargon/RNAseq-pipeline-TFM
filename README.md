@@ -45,10 +45,12 @@ A continuación encontrarás los pasos previos necesarios para la descarga de lo
   </tr>
 </table>
 
-Todos estos pogramas empleados se encuentran ya descargados en el entorno de conda RNAseq_pipeline.yml para mayor reproducibilidad. Asegúrate de tener Conda instalado. Descarga el archivo e introduce el siguiente comando en el terminal para crear el entorno de conda desde el archivo:
+Todos estos pogramas empleados se encuentran ya descargados en el entorno de conda RNAseq_pipeline.yml para mayor reproducibilidad. Debido a problemas de compatibilidad, los programas FastQ-Screen y RSEM se encuentran en un entorno diferente (FastQScreen_RSEM.yml) Asegúrate de tener Conda instalado. Descarga los archivos e introduce los siguientes comandos en el terminal para crear los entornos de conda desde los archivos:
 ```markdown
 conda env create -f RNAseq_pipeline.yml
+conda env create -f FastQScreen_RSEM.yml
 conda activate RNAseq_pipeline
+conda activate FastQScreen_RSEM
 ```
 
 ## **2. Paquetes de R empleados en el análisis de expresión diferencial** 
