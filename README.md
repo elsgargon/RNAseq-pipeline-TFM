@@ -12,40 +12,36 @@ A continuación encontrarás los pasos previos necesarios para la descarga de lo
     <th>Uso en el pipeline</th>
   </tr>
   <tr>
-    <td>SRAToolkits</td>
+    <td>SRAToolkits 3.1.1</td>
     <td>Para la descarga de archivos de Gene Expression Omnibus</td>
   </tr>
   <tr>
-    <td>FastQC</td>
+    <td>FastQC 0.12.1</td>
     <td>Para el control de calidad de las lecturas.</td>
   </tr>
   <tr>
-    <td>MultiQC</td>
+    <td>MultiQC 1.27.1</td>
     <td>Para la visualización conjunta de los ficheros de control de calidad de todas las muestras.</td>
   </tr>
   <tr>
-    <td>FastP</td>
+    <td>FastP 0.24.0</td>
     <td>Para estimar el número de lecturas que presentan una base indeterminada (N).</td>
   </tr>
   <tr>
-    <td>Fastq-Screen</td>
+    <td>Fastq-Screen 0.16.0</td>
     <td>Para determinar la existencia de posibles contaminaciones de otros organismos.</td>
   </tr>
   <tr>
-    <td>STAR</td>
+    <td>STAR 2.7.5a</td>
     <td>Para alinear las lecturas al genoma de referencia.</td>
   </tr>
   <tr>
-    <td>Bamtools</td>
+    <td>Bamtools 2.5.2</td>
     <td>Para realizar un control de calidad de las lecturas alineadas (ficheros .bam).</td>
   </tr>
   <tr>
-    <td>RSEM</td>
+    <td>RSEM 1.3.3</td>
     <td>Para cuantificar la expresión de los genes.</td>
-  </tr>
-  <tr>
-    <td>RNASeQC</td>
-    <td>?</td>
   </tr>
 </table>
 
