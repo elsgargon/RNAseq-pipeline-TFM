@@ -129,6 +129,34 @@ install_if_missing(cran_packages)
 #Instalar paquetes de Bioconductor
 install_bioconductor_if_missing(bioconductor_packages)
 
+## **3. Estructura final de directorios**
+```plaintext
+.
+├── data
+│   ├── raw
+│   ├── processed
+│   │   ├── Control_calidad
+│   │   │   ├── multiqc
+│   │   │   ├── contaminaciones
+│   │   │   │   └── multiqc
+│   │   │   ├── fastp_N_reads
+│   │   │   │   └── multiqc
+│   │   ├── Alineamiento
+│   │   │   └── Control_calidad_bam
+│   │   └── cuantificacion
+│   │   └── discordancias_sexo
+│   └── reference
+└── scripts
+│   ├── 1_descarga_y_conversión.sh
+│   ├── 2_control_calidad.sh
+│   ├── 3_alineamiento_control_calidad_bam.sh
+│   └── 4_cuantificacion_rsem.sh
+└── entornos_conda
+    ├── RNAseq_pipeline.yml
+    ├── FastQScreen.yml
+    └── RSEM.yml
+```
+
 #Cargar paquetes en memoria
 lapply(required_packages, library, character.only = TRUE)
 
