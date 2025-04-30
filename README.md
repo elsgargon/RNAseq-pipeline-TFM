@@ -142,12 +142,17 @@ lapply(required_packages, library, character.only = TRUE)
 │   │   │   ├── multiqc
 │   │   │   ├── contaminaciones
 │   │   │   │   └── multiqc
-│   │   │   ├── fastp_N_reads
-│   │   │   │   └── multiqc
+│   │   │   └── fastp_N_reads
+│   │   │       └── multiqc
 │   │   ├── Alineamiento
 │   │   │   └── Control_calidad_bam
-│   │   └── cuantificacion
-│   │   └── discordancias_sexo
+│   │   ├── cuantificacion
+│   │   │   ├── mujer
+│   │   │   └── hombre
+│   │   ├── discordancias_sexo
+│   │   └── Deseq2
+│   │       ├── women
+│   │       └── mwen
 │   └── reference
 └── scripts
 │   ├── 1_descarga_y_conversión
