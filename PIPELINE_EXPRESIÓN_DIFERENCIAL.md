@@ -200,7 +200,8 @@ dev.off()
 # 4. Análsis de expresión diferencial #
 #######################################
 # Realizar análisis con Deseq2
-dds_2 <- DESeq(ddsTxi_2) # Por defecto se utiliza la prueba de Wald; también puede usarse la prueba de razón de verosimilitud (LRT) si se especifica. LRT se emplea para evaluar el efecto global de una covariable.
+dds_2 <- DESeq(ddsTxi_2)
+# Por defecto se utiliza la prueba de Wald; también puede usarse la prueba de razón de verosimilitud (LRT) si se especifica.
 
 # Graficar la dispersión de los datos
 png("data/processed/Deseq2/women/postfiltering_plotDispEsts_women_rnaseq_with_IMC.png", width = 800, height = 600)
@@ -238,7 +239,10 @@ write.table(significativos, "data/processed/Deseq2/women/DE_genes_0.05_women.txt
 # Para extraer variables usadas e información del test usar:
 # mcols(res)$description
 
-### OPCIONAL: Control de calidad de los datos de conteo a nivel de muestra si se reportan muchos valores atípicos (por ejemplo, cientos o miles) en el resumen (res), se podría considerar realizar una exploración adicional para ver si una muestra o algunas pocas muestras deben ser eliminadas debido a su baja calidad. REALIZADO POR COMPROBACIÓN EXTRA NO POR EXCESO DE VALORES ATÍPICOS.
+### OPCIONAL: Control de calidad de los datos de conteo a nivel de muestra
+# si se reportan muchos valores atípicos (por ejemplo, cientos o miles) en el resumen (res),
+# se podría considerar realizar esta exploración adicional para ver si una muestra o algunas pocas muestras deben ser eliminadas debido a su baja calidad.
+# EN ESTE CASO REALIZADO POR COMPROBACIÓN EXTRA NO POR EXCESO DE VALORES ATÍPICOS.
 
 # 1. Visualizar las distancias de Cook para la detección de valores atípicos en las muestras
 #Verificar si las distancias de Cook de una muestra son consistentemente más altas que las de las demás.
@@ -575,7 +579,10 @@ write.table(significativos, "data/processed/Deseq2/men/DE_genes_0.05_men.txt", q
 # Para extraer variables usadas e información del test usar:
 # mcols(res)$description
 
-### OPCIONAL: Control de calidad de los datos de conteo a nivel de muestra si se reportan muchos valores atípicos (por ejemplo, cientos o miles) en el resumen (res), se podría considerar realizar una exploración adicional para ver si una muestra o algunas pocas muestras deben ser eliminadas debido a su baja calidad. REALIZADO POR COMPROBACIÓN EXTRA NO POR EXCESO DE VALORES ATÍPICOS.
+### OPCIONAL: Control de calidad de los datos de conteo a nivel de muestra
+# si se reportan muchos valores atípicos (por ejemplo, cientos o miles) en el resumen (res),
+# se podría considerar realizar esta exploración adicional para ver si una muestra o algunas pocas muestras deben ser eliminadas debido a su baja calidad.
+# EN ESTE CASO REALIZADO POR COMPROBACIÓN EXTRA NO POR EXCESO DE VALORES ATÍPICOS.
 
 # 1. Visualizar las distancias de Cook para la detección de valores atípicos en las muestras
 #Verificar si las distancias de Cook de una muestra son consistentemente más altas que las de las demás.
