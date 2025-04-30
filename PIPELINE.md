@@ -137,7 +137,7 @@ for (file_path in file_list) {
   
   # 12. Filtrar para obtener el sexo informado para la muestra correspondiente
   sexo_informado_muestra <- sexo_informado %>%
-    filter(V1.y == sample_id) %>%
+    filter(Muestras == sample_id) %>%
     pull(Gender)
   
   # 13. Pivotar los datos para obtener un formato adecuado
