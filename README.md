@@ -43,6 +43,10 @@ A continuación encontrarás los pasos previos necesarios para la descarga de lo
     <td>RSEM 1.3.3</td>
     <td>Para cuantificar la expresión de los genes.</td>
   </tr>
+   <tr>
+    <td>R </td>
+    <td>Para diferentes pasos del preprocesamiento y análisis de expresión diferencial.</td>
+  </tr>
 </table>
 
 Todos estos pogramas empleados se encuentran ya descargados en el entorno de conda RNAseq_pipeline.yml para mayor reproducibilidad. Debido a problemas de compatibilidad, los programas FastQ-Screen y RSEM se encuentran en un entorno diferente (FastQScreen.yml y RSEM.yml) Asegúrate de tener Conda instalado. Descarga los archivos, almacenados en la carpeta entornos_conda, e introduce los siguientes comandos en el terminal para crear los entornos de conda desde los archivos:
