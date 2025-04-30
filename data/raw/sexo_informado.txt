@@ -1,4 +1,4 @@
-Muestra	Gender
+Muestras	Gender
 SRR4026627	Female
 SRR4026628	Female
 SRR4026629	Female
