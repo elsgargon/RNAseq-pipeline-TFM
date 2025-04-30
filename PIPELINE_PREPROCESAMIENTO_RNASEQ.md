@@ -1,34 +1,6 @@
 # PIPELINE PREPROCESAMIENTO DE DATOS DE RNASEQ
 En esta página se detalla un pipeline completo (incluyendo descarga de muestras de GEO, pre-procesamiento de datos crudos, control de calidad, alineamiento y cuantificación) empleado para la realización del TFM titulado *"Estudio transcriptómico en epitelio nasal del efecto del sexo en el asma"*.
 Los scrips necesarios se encuentran en la carpeta scripts de este repositorio. También es posible descargar el entorno de conda con todos los programas empleados y en el archivo README encontrarán el código para instalar y cargar todos los paquetes de R que se emplearán.
-## Estructura final de directorios
-```plaintext
-.
-├── data
-│   ├── raw
-│   ├── processed
-│   │   ├── Control_calidad
-│   │   │   ├── multiqc
-│   │   │   ├── contaminaciones
-│   │   │   │   └── multiqc
-│   │   │   ├── fastp_N_reads
-│   │   │   │   └── multiqc
-│   │   ├── Alineamiento
-│   │   │   └── Control_calidad_bam
-│   │   └── cuantificacion
-│   │   └── discordancias_sexo
-│   └── reference
-└── scripts
-│   ├── 1_descarga_y_conversión.sh
-│   ├── 2_control_calidad.sh
-│   ├── 3_alineamiento_control_calidad_bam.sh
-│   └── 4_cuantificacion_rsem.sh
-└── entornos_conda
-    ├── RNAseq_pipeline.yml
-    ├── FastQScreen.yml
-    └── RSEM.yml
-```
-
 ## 1. Descarga de muestras desde GEO y conversión a fastq
 Es necesario **descargar previamente el "Accesion List" de GEO** y almacenarla en el **directorio data/raw** bajo el nombre de **muestras.txt**. Los archivos resultantes se almacenarán en esa misma carpeta en formato .fastq.gz para mejor optimización del espacio de almacenamiento. Para descargar y convertir las muestras de forma automática, ejecutar:
 ```markdown
