@@ -11,7 +11,8 @@ Realizaremos en análisis estadístico para determinar si existen genes diferenc
 # 1. Importar datos #
 #####################
 
-# Copiar archivos de mujeres a otro directorio (para ello necesitamos una rchivo como "data/raw/women_id_newrnaseq.txt" con las muestras de mujeres)
+# Copiar archivos de mujeres a otro directorio
+# Necesitamos un archivo como "data/raw/women_id_newrnaseq.txt" con las muestras de mujeres
 while read identifier; do
   find data/processed/cuantificacion/ -type f -name "${identifier}_.isoforms.results" -exec cp {} data/processed/cuantificacion/mujer/ \;
 done < data/raw/women_id_newrnaseq.txt
@@ -41,7 +42,8 @@ rownames(samples) <- samples$V1.y
 files <- paste0(dir, "/", samples$V1.y, "_.genes.results")
 names(files) <- samples$V1.y
 
-# Realizar test de correlación con variable Status para seleccionar covariables (aquellas significativas deben incluirse en el modelo)
+# Realizar test de correlación con variable Status para seleccionar covariables
+#(aquellas significativas deben incluirse en el modelo)
 cor.test(as.numeric(samples$Status), as.numeric(samples$Age))   
 cor.test(as.numeric(samples$Status), as.numeric(samples$Ethnicity)) 
 cor.test(as.numeric(samples$Status), as.numeric(samples$BMI)) 
@@ -63,7 +65,8 @@ txi <- tximport(files, type = "rsem", tx2gene = tx2gene)
 genes_cero <- rowSums(txi$length == 0) == ncol(txi$length)
 sum(genes_cero)
 
-# Recomendado por el creador, sustituir 0 por 1 (https://www.biostars.org/p/293639/) para permitir la carga de los datos
+# Sustituir 0 por 1
+# Recomendado por el creador en (https://www.biostars.org/p/293639/) para permitir la carga de los datos
 txi$length[txi$length == 0] <- 1
 
 # Crear DESeqDataSet con DESeq2
