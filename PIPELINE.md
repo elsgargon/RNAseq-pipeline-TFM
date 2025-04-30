@@ -164,9 +164,6 @@ suma_genes_Y <- rowSums(expr_genes_interes[, c("EIF1AY", "KDM5D", "UTY", "DDX3Y"
   )
 }
 
-# Ver los resultados para todas las muestras
-results
-
 # 17. Crear una lista para almacenar los resultados combinados
 combined_results <- list()
 
@@ -193,9 +190,6 @@ final_results <- bind_rows(combined_results)
 # 20. Reorganizar las columnas para que 'Sample' sea la primera columna
 final_results <- final_results %>%
   select(Sample, everything())  # 'everything()' mantiene el resto de las columnas tal como están
-
-# 21. Ver los primeros resultados
-head(final_results)
 
 # 22. Guardar los resultados en un archivo CSV
 write.table(final_results, "data/processed/discordancias_sexo/sexo_inferido_new_rnaseq.csv", quote=F, row.names=F)
@@ -251,6 +245,5 @@ ggplot(data_long, aes(x = Sample, y = Expresion_TPM, fill = Gen)) +
 
 # Guardar la gráfica como archivo PNG
 ggsave(output_path, width = 10, height = 6)
-
 
 ```
