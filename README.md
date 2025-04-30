@@ -129,6 +129,9 @@ install_if_missing(cran_packages)
 #Instalar paquetes de Bioconductor
 install_bioconductor_if_missing(bioconductor_packages)
 
+#Cargar paquetes en memoria
+lapply(required_packages, library, character.only = TRUE)
+´´´
 ## **3. Estructura final de directorios**
 ```plaintext
 .
@@ -147,17 +150,12 @@ install_bioconductor_if_missing(bioconductor_packages)
 │   │   └── discordancias_sexo
 │   └── reference
 └── scripts
-│   ├── 1_descarga_y_conversión.sh
-│   ├── 2_control_calidad.sh
-│   ├── 3_alineamiento_control_calidad_bam.sh
-│   └── 4_cuantificacion_rsem.sh
+│   ├── 1_descarga_y_conversión
+│   ├── 2_control_calidad
+│   ├── 3_alineamiento_control_calidad_bam
+│   └── 4_cuantificacion_rsem
 └── entornos_conda
     ├── RNAseq_pipeline.yml
     ├── FastQScreen.yml
     └── RSEM.yml
 ```
-
-#Cargar paquetes en memoria
-lapply(required_packages, library, character.only = TRUE)
-
-
