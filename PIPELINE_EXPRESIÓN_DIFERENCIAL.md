@@ -25,7 +25,6 @@ samples <- read.table("data/raw/metadata_new_rnaseq_sinbajacalidad.txt", header 
 
 # Cambiar formato de datos a binario y filtrar mujeres
 samples$Gender <- ifelse(samples$Gender == "Female", 1, ifelse(samples$Gender == "Male", 0, samples$Gender))
-samples$Gender <- ifelse(samples$Gender == "Female", 1, ifelse(samples$Gender == "Male", 0, samples$Gender))
 samples<-samples[samples$Gender==1, ]
 
 # Convertir variables a factores
