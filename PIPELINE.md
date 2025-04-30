@@ -19,10 +19,14 @@ Los scrips necesarios se encuentran en la carpeta scripts de este repositorio. T
 │   │   └── discordancias_sexo
 │   └── reference
 └── scripts
-    ├── 1_descarga_y_conversión.sh
-    ├── 2_control_calidad.sh
-    ├── 3_alineamiento_control_calidad_bam.sh
-    └── 4_cuantificacion_rsem.sh
+│   ├── 1_descarga_y_conversión.sh
+│   ├── 2_control_calidad.sh
+│   ├── 3_alineamiento_control_calidad_bam.sh
+│   └── 4_cuantificacion_rsem.sh
+└── entornos_conda
+    ├── RNAseq_pipeline.yml
+    ├── FastQScreen.yml
+    └── RSEM.yml
 ```
 
 ## 1. Descarga de muestras desde GEO y conversión a fastq
