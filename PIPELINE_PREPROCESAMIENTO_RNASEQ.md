@@ -219,9 +219,3 @@ ggplot(data_long, aes(x = Sample, y = Expresion_TPM, fill = Gen)) +
 ggsave(output_path, width = 10, height = 6)
 
 ```
-## 6. Análisis de expresión diferencial estratificado por sexo con Deseq2
-Realizaremos en análisis estadístico para determinar si existen genes diferencialmente expresados entre hombre y mujeres con y sin asma. Para ello emplearemos el paquete de R Deseq2 basándonos el pipeline de bioconductor (https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#standard-workflow), aunque se incluyen ciertos pasos adicionales.
-
-```r
-
-```
