@@ -112,7 +112,7 @@ results <- list()
 sexo_informado <- read.table("data/raw/sexo_informado.txt", sep = "\t", header = TRUE)
 
 # 5. Leer el archivo de mapeo de Gene ID a Gene Name
-gene_mapping <- read_csv("/home/invitado/Escritorio/TFG_Elsa/RNAseq/new_rsem/ensemble_id_to_gene_name.txt")
+gene_mapping <- read_csv("data/reference/ensemble_id_to_gene_name.txt")
 
 # 6. Procesar cada archivo
 for (file_path in file_list) {
