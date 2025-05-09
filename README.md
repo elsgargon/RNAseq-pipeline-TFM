@@ -44,7 +44,7 @@ A continuación encontrarás los pasos previos necesarios para la descarga de lo
     <td>Para cuantificar la expresión de los genes.</td>
   </tr>
    <tr>
-    <td>R </td>
+    <td>R 4.4.2 </td>
     <td>Para diferentes pasos del preprocesamiento y análisis de expresión diferencial.</td>
   </tr>
 </table>
