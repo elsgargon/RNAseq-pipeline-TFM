@@ -70,11 +70,13 @@ Clasificaremos como mujeres aquellas muestras que presenten una expresión del g
 Necesitaremos crear un archivo llamado sexo_informado.txt que incluya el nombre de las muestras y el sexo informado, en el mismo formato que el archivo "sexo_informado.txt" que se encuentra en la carpeta data/raw de este repositorio.
 
 Una vez hecho esto, emplearemos el siguiente código para inferir el sexo de los individuos e identificar discordancias con el sexo informado:
-```r
-# 1. Ruta de la carpeta donde están los archivos de RSEM
+
+```
+
+# 1. Definir la ruta de la carpeta donde están los archivos
 folder_path <- "data/processed/cuantificación"
 
-# 2. Obtener la lista de archivos .genes.results en la carpeta
+# 2. Obtener la lista de archivos .gct en la carpeta
 file_list <- list.files(folder_path, pattern = "*.genes.results", full.names = TRUE)
 
 # 3. Inicializar una lista para guardar los resultados
@@ -83,51 +85,48 @@ results <- list()
 # 4. Leer el archivo de sexo informado
 sexo_informado <- read.table("data/raw/sexo_informado.txt", sep = "\t", header = TRUE)
 
-# 5. Leer el archivo de mapeo de Gene ID a Gene Name
-gene_mapping <- read_csv("data/reference/ensemble_id_to_gene_name.txt")
-
-# 6. Procesar cada archivo
+# 5. Procesar cada archivo
 for (file_path in file_list) {
   
-  # 7. Cargar los datos de expresión génica
-  gene_expression <- read_delim(file_path, delim = "\t")
+  # 6. Cargar los datos de expresión génica
+  gene_expression <- read_delim(file_path, delim = "\t", skip = 2)
   
-  # 8. Realizar la correspondencia de IDs de genes con los nombres de genes
-  gene_expression <- merge(gene_expression, gene_mapping, by.x = "gene_id", by.y = "Gene_stable_ID_version")
-  
-  # 9. Seleccionar solo los genes de interés
+  # 7. Seleccionar solo los genes de interés
   genes_interes <- c("XIST", "EIF1AY", "KDM5D", "UTY", "DDX3Y", "RPS4Y1")
   expr_genes_interes <- gene_expression %>%
-    filter(Gene_name %in% genes_interes)
+    filter(Description %in% genes_interes)
   
-  # 10. Convertir los datos de expresión a un formato que facilite el análisis
+  # 8. Convertir los datos de expresión a un formato que facilite el análisis
   expr_genes_interes <- expr_genes_interes %>%
-    select(Gene_name, FPKM)
+    select(Description, starts_with("SRR")) %>%
+    pivot_wider(names_from = Description, values_from = starts_with("SRR"))
   
-  # 11. Extraer el ID de la muestra desde el nombre del archivo (por ejemplo, SRR11951898)
+  # 9. Extraer el ID de la muestra desde el nombre del archivo (por ejemplo, SRR11951898)
   sample_id <- str_extract(file_path, "SRR\\d+")
   
-  # 12. Filtrar para obtener el sexo informado para la muestra correspondiente
+  # 10. Filtrar para obtener el sexo informado para la muestra correspondiente
   sexo_informado_muestra <- sexo_informado %>%
-    filter(Muestras == sample_id) %>%
-    pull(Gender)
+    filter(V1 == sample_id) %>%
+    pull(V2)
   
-  # 13. Pivotar los datos para obtener un formato adecuado
-  expr_genes_interes <- expr_genes_interes %>% pivot_wider(names_from = Gene_name, values_from = FPKM)
-  
-  # 14. Calcular el sexo basado en la expresión génica
-# Calcular la suma de los genes del cromosoma Y
-suma_genes_Y <- rowSums(expr_genes_interes[, c("EIF1AY", "KDM5D", "UTY", "DDX3Y", "RPS4Y1")], na.rm = TRUE)
-
+  # 11. Calcular el sexo basado en la expresión génica
   sexo_calculado <- ifelse(
-  expr_genes_interes$XIST >= 2 * suma_genes_Y, "Female",
-  ifelse(suma_genes_Y >= 2 * expr_genes_interes$XIST, "Male", "Indeterminado")
+    expr_genes_interes$XIST > 1 & (expr_genes_interes$EIF1AY <= 1 & expr_genes_interes$KDM5D <= 1 & 
+                                    expr_genes_interes$UTY <= 1 & expr_genes_interes$DDX3Y <= 1 & 
+                                    expr_genes_interes$RPS4Y1 <= 1),
+    "Female",
+    ifelse(
+      (expr_genes_interes$EIF1AY > 1 | expr_genes_interes$KDM5D > 1 | expr_genes_interes$UTY > 1 | 
+       expr_genes_interes$DDX3Y > 1 | expr_genes_interes$RPS4Y1 > 1) & expr_genes_interes$XIST <= 1,
+      "Male",
+      "Indeterminado"
+    )
   )
   
-  # 15. Comparar el sexo calculado con el sexo informado y mostrar el resultado
+  # 12. Comparar el sexo calculado con el sexo informado y mostrar el resultado
   discordancia <- ifelse(sexo_calculado != sexo_informado_muestra, "Sí", "No")
   
-  # 16. Almacenar los resultados en la lista
+  # 13. Almacenar los resultados en la lista
   results[[sample_id]] <- list(
     expr_data = expr_genes_interes,
     sexo_informado = sexo_informado_muestra,
@@ -136,86 +135,63 @@ suma_genes_Y <- rowSums(expr_genes_interes[, c("EIF1AY", "KDM5D", "UTY", "DDX3Y"
   )
 }
 
-# 17. Crear una lista para almacenar los resultados combinados
+# 14. Crear una lista para almacenar los resultados combinados
 combined_results <- list()
 
-# 18. Iterar sobre cada elemento en 'results' y extraer la información necesaria
+# 15. Iterar sobre cada elemento en 'results' y extraer la información necesaria
 for (sample_id in names(results)) {
   
   # Obtener los datos de expresión genética para cada muestra
   expr_data <- results[[sample_id]]$expr_data
   
-  # Crear una fila con los valores de expresión y los metadatos (sexo calculado y discordancia)
+  #  Crear una fila con los valores de expresión y los metadatos (sexo calculado y discordancia)
   expr_data_with_metadata <- expr_data %>%
     mutate(Sample = sample_id, 
            Sexo_Calculado = results[[sample_id]]$sexo_calculado,
-	   Sexo_Informado= results[[sample_id]]$sexo_informado,
            Discordancia = ifelse(length(results[[sample_id]]$discordancia) > 0, results[[sample_id]]$discordancia, NA))
   
-  # Añadir la fila a la lista de resultados combinados
+  #  Añadir la fila a la lista de resultados combinados
   combined_results[[sample_id]] <- expr_data_with_metadata
 }
 
-# 19. Convertir la lista de resultados en un data frame
+# 16. Convertir la lista de resultados en un data frame
 final_results <- bind_rows(combined_results)
 
-# 20. Reorganizar las columnas para que 'Sample' sea la primera columna
+# 17. Reorganizar las columnas para que 'Sample' sea la primera columna
 final_results <- final_results %>%
   select(Sample, everything())  # 'everything()' mantiene el resto de las columnas tal como están
 
-# 22. Guardar los resultados en un archivo CSV
-write.table(final_results, "data/processed/discordancias_sexo/sexo_inferido_new_rnaseq.csv", quote=F, row.names=F)
+# 18. Ver los primeros resultados
+head(final_results)
 
-# 23. Mostrar solo las muestras con discordancia
-muestras_discordantes <- final_results %>%
-  filter(Sexo_Calculado != Sexo_Informado)
+# 19. Guardar los resultados en un archivo CSV
+write_csv(final_results, ""data/processed/discordancias_sexo/resultados_combinados.csv")
 
-if (nrow(muestras_discordantes) > 0) {
-  cat("Se encontraron muestras con discordancia entre el sexo informado y el calculado:\n")
-  print(muestras_discordantes$Sample)
-} else {
-  cat("No se encontraron discordancias entre el sexo informado y el calculado.\n")
-}
-
-# 24. Representación gráfica del resultado
-# Cambiar el formato de 'final_results' a largo para la gráfica de barras apiladas
+# 20. Cambiar el formato de 'final_results' a largo para la gráfica de barras apiladas
 data_long <- final_results %>%
-  select(Sample, XIST, EIF1AY, KDM5D, UTY, DDX3Y, RPS4Y1, Sexo_Calculado, Sexo_Informado) %>%
+  select(Sample, XIST, EIF1AY, KDM5D, UTY, DDX3Y, RPS4Y1, Sexo_Calculado) %>%
   pivot_longer(cols = XIST:RPS4Y1, names_to = "Gen", values_to = "Expresion_TPM")
 
-# Calcular la posición en y máxima para las etiquetas de cada muestra
+# 21. Calcular la posición en y máxima para las etiquetas de cada muestra
 max_y_position <- data_long %>%
   group_by(Sample) %>%
   summarize(Max_Expresion = sum(Expresion_TPM, na.rm = TRUE))
 
-# Crear la gráfica y guardarla como PNG
-output_path <- "data/processed/discordancias_sexo/sexo_muestras_calculado_grafica.png"
+# 22. Crear la gráfica y guardarla como PNG
+output_path <- ""data/processed/discordancias_sexo/expresion_genica_muestras.png"
 
-# Crear una columna con el sexo calculado y un asterisco si hay discordancia
-final_results <- final_results %>%
-  mutate(Sexo_Label = ifelse(Sexo_Calculado != Sexo_Informado,
-                             paste0(Sexo_Calculado, "*"),
-                             Sexo_Calculado))
-
-annot_data <- max_y_position %>%
-  mutate(Label_Pos = Max_Expresion * 1.1) %>%  # 10% por encima del máximo
-  left_join(final_results %>% select(Sample, Sexo_Label), by = "Sample")
-
-# Crear el gráfico
 ggplot(data_long, aes(x = Sample, y = Expresion_TPM, fill = Gen)) +
-  geom_bar(stat = "identity", color = "black") +
+  geom_bar(stat = "identity", color = "black") +  # Color de borde negro para todas las barras
   scale_fill_manual(values = c("XIST" = "skyblue", "EIF1AY" = "orange", 
                                "KDM5D" = "purple", "UTY" = "green", 
                                "DDX3Y" = "pink", "RPS4Y1" = "yellow")) +
-  labs(x = "Muestras", y = "Expresión Génica (TPM)", title = "Expresión de genes de cromosomas sexuales por muestra") +
+  labs(x = "Muestras", y = "Expresión Génica (TPM)", title = "Expresión de Genes por Muestra") +
   theme_classic() +
-  # Etiquetas de sexo calculado (con * si hay discordancia)
-  geom_text(data = annot_data,
-            aes(x = Sample, y = Label_Pos, label = Sexo_Label),
+  # Anotación para el sexo calculado en cada muestra
+  geom_text(data = max_y_position %>% left_join(final_results %>% select(Sample, Sexo_Calculado), by = "Sample"),
+            aes(x = Sample, y = Max_Expresion + 5, label = Sexo_Calculado),
             inherit.aes = FALSE, color = "black", size = 3, angle = 90) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
-# Guardar la gráfica como archivo PNG
+# 23.Guardar la gráfica como archivo PNG
 ggsave(output_path, width = 10, height = 6)
-
-```
