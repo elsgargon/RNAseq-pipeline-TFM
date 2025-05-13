@@ -72,7 +72,9 @@ Necesitaremos crear un archivo llamado sexo_informado.txt que incluya el nombre 
 Una vez hecho esto, emplearemos el siguiente código para inferir el sexo de los individuos e identificar discordancias con el sexo informado:
 
 ```
-
+########
+# EN R #
+########
 # 1. Definir la ruta de la carpeta donde están los archivos
 folder_path <- "data/processed/cuantificación"
 
