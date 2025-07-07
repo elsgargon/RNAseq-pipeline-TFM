@@ -133,7 +133,7 @@ install_bioconductor_if_missing(bioconductor_packages)
 lapply(required_packages, library, character.only = TRUE)
 ```
 ## **3. Estructura final de directorios**
-Emplea el siguiente código para crear la estructura de directorios necesaria`una vez descargado este repositorio:
+Emplea el siguiente código para crear la estructura de directorios necesaria una vez descargado este repositorio:
 
 ```markdown
 # Subdirectorios dentro de data/processed
