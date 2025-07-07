@@ -54,6 +54,8 @@ Todos estos pogramas empleados se encuentran ya descargados en el entorno de con
 conda env create -f RNAseq_pipeline.yml
 conda env create -f FastQScreen.yml
 conda env create -f RSEM.yml
+
+# Activa cada entorno cuando sea necesario en cada paso con los siguientes comandos
 conda activate RNAseq_pipeline
 conda activate RSEM
 conda activate FastQScreen
