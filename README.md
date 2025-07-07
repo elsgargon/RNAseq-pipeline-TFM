@@ -135,7 +135,15 @@ lapply(required_packages, library, character.only = TRUE)
 
 ## **3. Descarga de archivos de referencia necesarios para STAR y RSEM**
 ```markdown
+# Directorio de destino
+cd data/reference
 
+# Descargar los archivos GTF y FASTA de GENCODE release 48
+wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/gencode.v48.annotation.gtf.gz
+wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/GRCh38.p14.genome.fa.gz
+
+# Volver a directorio actual
+cd ../..
 ```
 
 ## **4. Estructura final de directorios**
