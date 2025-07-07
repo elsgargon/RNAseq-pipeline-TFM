@@ -133,6 +133,21 @@ install_bioconductor_if_missing(bioconductor_packages)
 lapply(required_packages, library, character.only = TRUE)
 ```
 ## **3. Estructura final de directorios**
+Emplea el siguiente código para crear la estructura de directorios necesaria`una vez descargado este repositorio:
+
+```markdown
+# Subdirectorios dentro de data/processed
+mkdir -p data/processed/Control_calidad/multiqc
+mkdir -p data/processed/Control_calidad/contaminaciones/multiqc
+mkdir -p data/processed/Control_calidad/fastp_N_reads/multiqc
+mkdir -p data/processed/Alineamiento/Control_calidad_bam
+mkdir -p data/processed/cuantificacion/mujer
+mkdir -p data/processed/cuantificacion/hombre
+mkdir -p data/processed/discordancias_sexo
+mkdir -p data/processed/Deseq2/women
+mkdir -p data/processed/Deseq2/mwen
+```
+
 ```plaintext
 .
 ├── data
