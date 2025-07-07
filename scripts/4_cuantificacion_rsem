@@ -7,7 +7,7 @@ mkdir -p data/processed/cuantificacion
 
 # Crear referencia de RSEM
 rsem-prepare-reference --num-threads 10 \
-    --gtf data/referencia/gencode.v47.annotation.gtf \
+    --gtf data/referencia/gencode.v48.annotation.gtf \
     data/referencia/GRCh38.p14.genome.fa \
     rsem_reference
 
