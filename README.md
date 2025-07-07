@@ -2,7 +2,7 @@
 En este repositorio se incluyen todos los script empleados para el desarrollo del TFM *"Estudio transcriptómico en epitelio nasal del efecto del sexo en el asma"* en el máster en Bioinformática de la Universidad VIU, edición 2024-2025. 
 Los scripts se emplean para hacer un análisis de expresión diferencial entre asmáticos y controles estratificado por sexo. El orden de ejecución de scripts viene determinado en su nombre. En el apartado PIPELINE.md se encuentran detallados los pasos necesarios para ejecutar el pipeline al completo. 
 
-A continuación encontrarás los pasos previos necesarios para la descarga de los archivos de referencia, programas y paquetes de R empleados en este pipeline.
+Lo primero es clonar este repositorio en la carpeta de tu preferencia. A continuación encontrarás los pasos previos necesarios para la descarga de los archivos de referencia, programas y paquetes de R empleados en este pipeline.
 
 ## **1. Programas empleados en el preprocesado**:
 
