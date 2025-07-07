@@ -2,7 +2,7 @@
 En este repositorio se incluyen todos los script empleados para el desarrollo del TFM *"Estudio transcriptómico en epitelio nasal del efecto del sexo en el asma"* en el máster en Bioinformática de la Universidad VIU, edición 2024-2025. 
 Los scripts se emplean para hacer un análisis de expresión diferencial entre asmáticos y controles estratificado por sexo. El orden de ejecución de scripts viene determinado en su nombre. En el apartado PIPELINE.md se encuentran detallados los pasos necesarios para ejecutar el pipeline al completo. 
 
-A continuación encontrarás los pasos previos necesarios para la descarga de los programas y paquetes de R empleados en este pipeline.
+A continuación encontrarás los pasos previos necesarios para la descarga de los archivos de referencia, programas y paquetes de R empleados en este pipeline.
 
 ## **1. Programas empleados en el preprocesado**:
 
@@ -132,7 +132,13 @@ install_bioconductor_if_missing(bioconductor_packages)
 #Cargar paquetes en memoria
 lapply(required_packages, library, character.only = TRUE)
 ```
-## **3. Estructura final de directorios**
+
+## **3. Descarga de archivos de referencia necesarios para STAR y RSEM**
+```markdown
+
+```
+
+## **4. Estructura final de directorios**
 Emplea el siguiente código para crear la estructura de directorios necesaria una vez descargado este repositorio:
 
 ```markdown
